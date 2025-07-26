@@ -1,0 +1,58 @@
+/* ========== COURSES PAGE ONLY ========== */
+
+.search-filter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.search-filter input[type="text"] {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+}
+.filter-btn {
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  color: #183b56;
+  transition: background 0.2s;
+}
+.filter-btn:hover {
+  background: #f2f2f2;
+}
+
+.courses-search-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.courses-search-bar input[type="text"] {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+
+.filter-btn {
+  background: #fff;
+  border: 1px solid #e1e6ea;
+  border-radius: 8px;
+  padding: 0 18px;
+  font-size: 1rem;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.filter-btn:hover {
+  background: #f2f5f7;
+}
+
+/* Remove all .course-card, .courses-grid, .progress-bar-bg, .continue-btn, etc. styles from this file */

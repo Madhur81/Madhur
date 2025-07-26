@@ -1,0 +1,190 @@
+/* Progress Page Styles */
+.progress-summary-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  margin-bottom: 32px;
+  flex-wrap: nowrap;
+}
+.summary-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60,80,120,0.07);
+  padding: 24px 20px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 2px solid #e6eaf0;
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+}
+.summary-card:hover {
+  box-shadow: 0 8px 24px rgba(60,80,120,0.18);
+  border-color: #1abc9c;
+  transform: translateY(-6px) scale(1.03);
+}
+.summary-title {
+  font-size: 1.1rem;
+  color: #6c7a89;
+  margin-bottom: 0.5em;
+}
+.summary-value {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.25em;
+}
+.summary-desc {
+  font-size: 1rem;
+  color: #6c7a89;
+}
+.summary-desc.positive {
+  color: #1abc9c;
+}
+.progress-bar-bg {
+  background: #e1e6ea;
+  border-radius: 6px;
+  height: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.progress-bar-fill {
+  background: #1abc9c;
+  height: 100%;
+  border-radius: 6px;
+}
+.progress-charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+.progress-chart {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60,80,120,0.07);
+  padding: 24px 20px 18px 20px;
+}
+.progress-img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin-top: 12px;
+}
+.course-progress {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60,80,120,0.07);
+  padding: 24px 20px 18px 20px;
+}
+.course-progress-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #3a5169;
+}
+.progress-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.leaderboard {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60,80,120,0.07);
+  padding: 24px 20px 18px 20px;
+}
+.leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.leaderboard-list li {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 1.08rem;
+  padding: 10px 0;
+  border-radius: 8px;
+  margin-bottom: 2px;
+}
+.leaderboard-list li.active {
+  background: #eaf6f3;
+}
+.rank {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: #e1e6ea;
+  color: #34495e;
+}
+.rank.gold { background: #ffe066; color: #bfa100; }
+.rank.silver { background: #eaf6f3; color: #1abc9c; }
+.rank.bronze { background: #ffd6a0; color: #b97a56; }
+.points {
+  margin-left: auto;
+  font-weight: 600;
+  color: #1abc9c;
+}
+.achievements {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60,80,120,0.07);
+  padding: 24px 20px 18px 20px;
+}
+.achievements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.achievements-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.08rem;
+  padding: 10px 0;
+  border-radius: 8px;
+  margin-bottom: 2px;
+}
+.achievement-icon {
+  font-size: 1.3rem;
+  color: #1abc9c;
+}
+.achievement-desc {
+  color: #6c7a89;
+  margin-left: 8px;
+}
+@media (max-width: 900px) {
+  .progress-summary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .progress-charts-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .progress-bottom-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .progress-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .progress-charts-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .progress-bottom-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .summary-card, .progress-chart, .course-progress, .leaderboard, .achievements {
+    padding: 16px 8px;
+  }
+}
