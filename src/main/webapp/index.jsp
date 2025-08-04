@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("loggedInUser") == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,17 +34,21 @@
             });
         });
     </script>
-
+  <script src="https://s3.tradingview.com/tv.js"></script>
     
 
 </head>
 <body>
+
  
     <%@ include file="pages/sidebar.jsp" %>
     <%@ include file="pages/header.jsp" %>
   
         <%
-            String pageName = request.getParameter("page");
+	        String pageName = (String) request.getAttribute("page");  // Check attribute first
+	        if (pageName == null || pageName.trim().isEmpty()) {
+	            pageName = request.getParameter("page");  // then check URL
+	        }
             if (pageName == null || pageName.trim().isEmpty()) {
                 pageName = "home";
             }
@@ -50,6 +60,6 @@
             rd.include(request, response);
         %>
     
- 
+
 </body>
 </html>

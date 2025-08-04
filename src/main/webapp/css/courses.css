@@ -56,3 +56,111 @@
 }
 
 /* Remove all .course-card, .courses-grid, .progress-bar-bg, .continue-btn, etc. styles from this file */
+
+
+/* learnig css*/
+
+    iframe {
+      width: 100%;
+      height: 360px;
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .description {
+      background-color: #ffffff;
+      padding: 2em;
+      margin-top: 2em;
+      margin-bottom: 3em;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .description h3 {
+      color: #007bff;
+      margin-bottom: 0.5em;
+      display: flex;
+      align-items: center;
+      font-size: 1.25em;
+    }
+
+    .description h3::before {
+      content: "📌";
+      margin-right: 0.5em;
+    }
+
+    .description ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .description ul li::before {
+      content: "✅ ";
+      color: #28a745;
+    }
+
+    .description ul li {
+      margin-bottom: 0.5em;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .section-title {
+      font-size: 1.6em;
+      margin: 2.5em 0 1em;
+      color: #333;
+      border-bottom: 3px solid #007bff;
+      display: inline-block;
+      padding-bottom: 0.3em;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2em;
+    }
+
+    .video-container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 1em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .video-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .video-container p {
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 0.5em;
+      color: #333;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 2em;
+      padding: 0.75em 1.5em;
+      background-color: #007bff;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      .description, .video-container {
+        padding: 1em;
+      }
+
+   
+    }

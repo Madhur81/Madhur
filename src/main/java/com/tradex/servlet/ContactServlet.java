@@ -25,6 +25,7 @@ public class ContactServlet extends HttpServlet {
 
         if (isSaved) {
         	response.sendRedirect(request.getContextPath() + "/index.jsp?page=support");
+        	
 
         } else {
             response.sendRedirect("support.jsp");

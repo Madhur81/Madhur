@@ -14,17 +14,37 @@
 
 /* Color Variables */
 :root {
+  /* Primary Colors */
   --primary: #00f0b8;
   --primary-dark: #13b98a;
+  
+  /* Layout Colors */
   --sidebar-bg: #fff;
   --main-bg: #f6fafd;
+  --color-surface: #ffffff;
+  --color-input-bg: #f8f9fa;
+  
+  /* Text Colors */
   --text-main: #111;
   --text-muted: #6c7a89;
+  --color-text: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  
+  /* Border & Accent Colors */
   --gray-light: #e0e0e0;
   --gray-bg: #f2f2f2;
+  --color-border: var(--gray-light);
+  --color-accent: var(--primary);
+  --color-accent-dark: var(--primary-dark);
+  
+  /* Status Colors */
   --success: #1fd1a6;
   --warning: #ffd600;
   --star: #ffb400;
+  --color-error: #dc3545;
+  
+  /* Shadows */
+  --shadow-elevated: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Font Family */
@@ -44,3 +64,5 @@ h1, h2, h3, h4, h5 {
 h1 { font-size: 2.2rem; }
 h2 { font-size: 1.75rem; }
 h3 { font-size: 1.3rem; }
+
+

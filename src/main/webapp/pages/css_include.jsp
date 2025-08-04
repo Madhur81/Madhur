@@ -8,6 +8,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/progress.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/settings.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/support.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/profile.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/messages.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/nav_icons/all.min.css" />
  

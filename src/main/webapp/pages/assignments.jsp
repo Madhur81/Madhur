@@ -32,6 +32,7 @@
                 <div class="assignment-title">Technical Analysis Chart Reading</div>
                 <span class="badge pending">Pending</span>
                 <button class="assign-btn">Start Assignment</button>
+                <a href="index.jsp?page=technical" class="assign-btn">Start Assignment</a>
               </div>
               <div class="assignment-course">Technical Analysis Fundamentals</div>
               <div class="assignment-desc">Analyze 5 different chart patterns and submit your interpretations with support/resistance levels.</div>

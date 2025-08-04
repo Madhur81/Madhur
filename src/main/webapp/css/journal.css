@@ -73,6 +73,11 @@ body {
   background: #159c80;
 }
 
+.add-trade-btn-wrapper {
+  margin: 20px 0;
+  text-align: right;
+}
+
 .journal-search-bar {
   display: flex;
   gap: 16px;
@@ -107,150 +112,7 @@ body {
   font-weight: 600;
   margin-bottom: 18px;
 }
-.trade-history-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px rgba(60,80,120,0.08);
-  overflow: hidden;
-  margin-bottom: 32px;
-}
 
-.trade-history-table th, .trade-history-table td {
-  padding: 18px 14px;
-  text-align: left;
-  font-size: 1rem;
-  background: #fff;
-}
-
-.trade-history-table th {
-  background: #f7f9fb;
-  color: #6c7a89;
-  font-weight: 600;
-  border-bottom: 1.5px solid #e6eaf0;
-}
-
-.trade-history-table tr:last-child td {
-  border-bottom: none;
-}
-
-.trade-history-table td {
-  vertical-align: middle;
-  border-bottom: 1px solid #f0f2f5;
-}
-
-.trade-history-table td.symbol-cell .tag {
-  background: #e1e6ea;
-  color: #34495e;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 4px 16px;
-}
-
-.trade-history-table td.type-cell .tag {
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 4px 16px;
-}
-.trade-history-table td.type-cell .tag.buy {
-  background: #d4f9f2;
-  color: #1abc9c;
-}
-.trade-history-table td.type-cell .tag.sell {
-  background: #fdeaea;
-  color: #e74c3c;
-}
-
-.trade-history-table td.pnl-group {
-  background: #eaf6f3;
-  color: #1abc9c;
-  font-weight: 700;
-  border-radius: 14px 0 0 14px;
-  text-align: center;
-}
-.trade-history-table td.pnl-group.negative {
-  background: #fdeaea;
-  color: #e74c3c;
-}
-
-.trade-history-table td.percent-group {
-  background: #eaf6f3;
-  color: #1abc9c;
-  font-weight: 700;
-  border-radius: 0 14px 14px 0;
-  text-align: center;
-}
-.trade-history-table td.percent-group.negative {
-  background: #fdeaea;
-  color: #e74c3c;
-}
-
-.trade-history-table td.notes-cell {
-  font-size: 1rem;
-  color: #3a5169;
-}
-.trade-history-table td.notes-cell .tag {
-  background: #e1e6ea;
-  color: #34495e;
-  border-radius: 10px;
-  font-size: 0.95em;
-  font-weight: 500;
-  margin-right: 6px;
-  margin-bottom: 2px;
-  padding: 3px 12px;
-  display: inline-block;
-}
-
-.tag {
-  display: inline-block;
-  padding: 3px 12px;
-  border-radius: 100px;
-  font-size: 0.95em;
-  font-weight: 500;
-  margin-right: 6px;
-  margin-bottom: 2px;
-  background: #eaf6f3;
-  color: #159c80;
-  border: none;
-}
-.tag.symbol {
-  background: #e1e6ea;
-  color: #34495e;
-}
-.tag.buy {
-  background: #d4f9f2;
-  color: #1abc9c;
-}
-.tag.sell {
-  background: #fdeaea;
-  color: #e74c3c;
-}
-.tag.note {
-  background: #f2f5f7;
-  color: #6c7a89;
-}
-
-/* Icon space for buy/sell (to be used in HTML) */
-.type-icon {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #eaf6f3;
-  color: #1abc9c;
-  text-align: center;
-  line-height: 22px;
-  font-size: 1rem;
-  margin-right: 6px;
-}
-.type-icon.sell {
-  background: #fdeaea;
-  color: #e74c3c;
-}
 
 @media (max-width: 900px) {
   .journal-summary-grid {
@@ -282,5 +144,177 @@ body {
   .trade-history-table th, .trade-history-table td {
     padding: 10px 6px;
     font-size: 0.95rem;
+  }
+}
+
+
+/*dynamic table css*/
+
+.trade-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.trade-table th,
+.trade-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.trade-table th {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.trade-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.trade-table td {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Highlight BUY and SELL types */
+.buy {
+  color: green;
+  font-weight: bold;
+}
+
+.sell {
+  color: red;
+  font-weight: bold;
+}
+
+/* Message for no data */
+.trade-table .no-data {
+  color: #ff4444;
+  font-weight: bold;
+  padding: 15px;
+}
+
+
+/*model */
+/* Modal background */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 700px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Hide by default */
+.hidden {
+display: none !important;
+}
+
+/* Modal box */
+.modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 700px; /* slightly wider for landscape */
+  position: relative;
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+/* Form styling */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+}
+
+form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+form input,
+form select,
+form textarea {
+  grid-column: span 1;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Make Notes field full width */
+
+
+/* Submit button */
+/* Submit button full width below */
+.submit-btn {
+  grid-column: span 2;
+  margin-top: 1rem;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Smooth animation */
+
+/* Responsive - single column for small screens */
+@media (max-width: 600px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  #tradeNotes,
+  .submit-btn {
+    grid-column: span 1;
   }
 }

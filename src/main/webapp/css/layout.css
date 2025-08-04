@@ -98,6 +98,14 @@
   color: var(--text-main);
 }
 
+.nav__link .nav__icon {
+  background-color: var(--text-main);
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* makes dark icons white-like */
+  transition: transform 0.2s ease;
+}
 
 
 
@@ -158,4 +166,9 @@
   .courses-grid, .course-cards {
     grid-template-columns: 1fr;
   }
+}
+
+.fa-sign-out-alt
+{
+  margin-left: 10px;
 }

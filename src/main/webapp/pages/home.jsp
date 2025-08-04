@@ -1,3 +1,4 @@
+  <script src="https://s3.tradingview.com/tv.js"></script>
 
 <div class="main-page">
 <div class="main-content">
@@ -5,8 +6,8 @@
             <h1 class="welcome">Welcome back, <span class="username">Madhur!</span></h1>
             <p>Here's your trading education progress and portfolio overview.</p>
     </div>
-            <!-- ========== Stats Cards ========== -->
-          <section class="stats-grid">
+    
+    <section class="stats-grid">
             <div class="card stat-card">
               <div class="stat-title">Account Balance</div>
               <div class="stat-value">$25,48.00</div>
@@ -25,59 +26,86 @@
               <div class="stat-change neutral">4 modules completed</div>
             </div>
           </section>
+		
+			<div class="chart-watchlist-wrapper">
+				  <!-- TradingView Chart -->
+				  <div id="tradingview_chart"></div>
+				
+				  <!-- Watchlist Panel -->
+				  <div class="watchlist-panel">
+				    <h3>Watchlist</h3>
+				    <ul id="watchlist">
+				      <!-- Dynamic Items will be inserted here -->
+				    </ul>
+				  </div>
+				</div>
+				
+			
+			<script>
+			const watchlistPairs = [
+			
+				  // Forex
+				  { name: "EUR/USD", tvSymbol: "OANDA:EURUSD" },
+				  { name: "USD/INR", tvSymbol: "OANDA:USDINR" },
+				  { name: "GBP/USD", tvSymbol: "OANDA:GBPUSD" },
+				  { name: "USD/JPY", tvSymbol: "OANDA:USDJPY" },
+				  { name: "AUD/USD", tvSymbol: "OANDA:AUDUSD" },
+
+				  // Crypto
+				  { name: "Bitcoin", tvSymbol: "BINANCE:BTCUSDT" },
+				  { name: "Ethereum", tvSymbol: "BINANCE:ETHUSDT" },
+				  { name: "Solana", tvSymbol: "BINANCE:SOLUSDT" },
+				  { name: "Dogecoin", tvSymbol: "BINANCE:DOGEUSDT" }
+				];
+
+
+
+  // Load default chart
+  function loadChart(symbol) {
+    if (window.widget) {
+      window.widget.remove();
+    }
+
+    window.widget = new TradingView.widget({
+      container_id: "tradingview_chart",
+      width: "100%",
+      height: 500,
+      symbol: symbol,
+      interval: "1",
+      timezone: "Asia/Kolkata",
+      theme: "Dark",
+      style: "1",
+      locale: "en",
+      toolbar_bg: "#f1f3f6",
+      enable_publishing: false,
+      allow_symbol_change: true,
+      hide_top_toolbar: false,
+      withdateranges: true
+    });
+  }
+
+  // Create watchlist items
+  const watchlistEl = document.getElementById("watchlist");
+  watchlistPairs.forEach(pair => {
+    const li = document.createElement("li");
+    li.textContent = pair.name;
+    li.onclick = () => {
+      document.querySelectorAll("#watchlist li").forEach(el => el.classList.remove("active"));
+      li.classList.add("active");
+      loadChart(pair.tvSymbol);
+    };
+    watchlistEl.appendChild(li);
+  });
+
+  // Load first symbol by default
+  loadChart(watchlistPairs[0].tvSymbol);
+  document.querySelectorAll("#watchlist li")[0].classList.add("active");
+</script>
+
+    
+          
             
-            <!-- ========== course Cards ========== -->
-  
-              <div class="courses-header">
-                <h2>Enrolled Courses</h2>
-                <button class="view-all-btn">View All</button>
-              </div>
-
-              <div class="courses-grid">
-
-                <!-- Course Card 1 -->
-                <div class="course-card">
-                  <img src="tumbnails/technical.png" alt="Technical Analysis Fundamentals" class="course-img">
-                  <div class="course-title"><strong>Technical Analysis Fundamentals</strong></div>
-                  <div class="course-time">Time spent: 4.5 hours</div>
-                  <div class="course-progress-row">
-                    <span>Progress</span>
-                    <span>75%</span>
-                  </div>
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 75%"></div>
-                  </div>
-                  <button class="continue-btn">Continue Learning</button>
-                </div>
-                <!-- Course Card 2 -->
-                <div class="course-card">
-                  <img src="tumbnails/risk.png" alt="Risk Management Strategies" class="course-img">
-                  <div class="course-title"><strong>Risk Management Strategies</strong></div>
-                  <div class="course-time">Time spent: 2.1 hours</div>
-                  <div class="course-progress-row">
-                    <span>Progress</span>
-                    <span>45%</span>
-                  </div>
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 45%"></div>
-                  </div>
-                  <button class="continue-btn">Continue Learning</button>
-                </div>
-                <!-- Course Card 3 -->
-                <div class="course-card">
-                  <img src="tumbnails/option.png" alt="Options Trading Basics" class="course-img">
-                  <div class="course-title"><strong>Options Trading Basics</strong></div>
-                  <div class="course-time">Time spent: 1.8 hours</div>
-                  <div class="course-progress-row">
-                    <span>Progress</span>
-                    <span>25%</span>
-                  </div>
-                  <div class="progress-bar-bg">
-                    <div class="progress-bar-fill" style="width: 25%"></div>
-                  </div>
-                  <button class="continue-btn">Continue Learning</button>
-                </div>
-                </div>
+            
       <!-- ========== Announcements & Deadlines ========== -->
             <section class="info-grid">
               <div class="info-card announcements">
