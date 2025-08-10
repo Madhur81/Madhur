@@ -10,4 +10,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/support.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/messages.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/nav_icons/all.min.css" />
+    
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/assPages.css" />
  

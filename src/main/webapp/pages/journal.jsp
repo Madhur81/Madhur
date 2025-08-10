@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.tradex.model.Trade" %>
-<% List<Trade> trades = (List<Trade>) request.getAttribute("tradeList");%>
+<% 
+    List<Trade> trades = (List<Trade>) request.getAttribute("tradeList");
+    String message = (String) request.getAttribute("message");
+%>
 
-
- 
 <%
 		double totalPnl = 0;
 		int winCount = 0;
@@ -35,18 +36,15 @@
 		String formattedBestPnl = String.format("%s$%.2f", bestPnl >= 0 ? "+" : "-", Math.abs(bestPnl));
 %>
 
-
-
 <div class="main-page">
 <div class="main-content">
-        <!-- <section class="main__content"> -->
           <div class="main-Title-of-Page">
             <h1>Trading Journal</h1>
             <p>Track and analyze your trading performance to improve your strategy.</p>
           </div>
        <div class="journal-summary-grid">
        	<div class="journal-summary-card">
-		  <div class="summary-title">Total P&amp;L</div>
+		  <div class="summary-title">Total P&L</div>
 		  <div class="summary-value <%= pnlClass %>"><%= formattedTotalPnl %></div>
 		  <div class="summary-desc">Across <%= totalTrades %> trades</div>
 		</div>
@@ -62,15 +60,18 @@
 		  <div class="summary-value <%= bestPnl >= 0 ? "positive" : "negative" %>"><%= formattedBestPnl %></div>
 		  <div class="summary-desc"><%= bestSymbol != null ? bestSymbol : "N/A" %></div>
 		</div>
-
-         
           </div>
+          
           <div class="add-trade-btn-wrapper">
-			  <button id="openAddTradeModal" class="add-trade-btn">+ Add Trade</button>
+			  <button id="openAddTradeModal" class="add-trade-btn">
+			    <i class="fas fa-plus"></i>
+			    Add Trade
+			  </button>
 			</div>
+			
           <div class="journal-search-bar">
-            <input type="text" id="searchInput" placeholder="Search trades by symbol or notes...">
-            <select id="symbolFilter">
+            <input type="text" id="searchInput" placeholder="Search trades by symbol or notes..." class="search-input">
+            <select id="symbolFilter" class="filter-select">
             <option value="">All Symbols</option>
                 <% if (trades != null) {
         		 java.util.Set<String> symbols = new java.util.HashSet<>();
@@ -82,15 +83,18 @@
 		   		 <option value="<%= symbol %>"><%= symbol %></option>
     <% } } %>
    			 </select>
-           <select id="typeFilter">
+           <select id="typeFilter" class="filter-select">
            <option value="">All Types</option>
 		    <option value="BUY">BUY</option>
 		    <option value="SELL">SELL</option>
            </select>
           </div>
+          
           <div class="trade-history-section">
             <h2>Trade History</h2>
+            <div class="table-container">
              <table class="trade-table">
+        <thead>
         <tr>
         	<th>ID</th>
             <th>Date</th>
@@ -104,37 +108,39 @@
             <th>Notes</th>
             <th>Actions</th>
         </tr>
+        </thead>
+        <tbody>
         <%
-       			
         			if (trades != null) {
-        				
           		  for (Trade trade : trades) {
         %>
-        
-      
-        <tr>
+        <tr class="trade-row">
         	<td><%= trade.getId() %></td>
             <td><%= trade.getDate() %></td>
-            <td><%= trade.getSymbol() %></td>
-            <td><span class="<%= trade.getType().equalsIgnoreCase("BUY") ? "buy" : "sell" %>"><%= trade.getType() %></span></td>
+            <td class="symbol-cell"><%= trade.getSymbol() %></td>
+            <td><span class="trade-type <%= trade.getType().equalsIgnoreCase("BUY") ? "buy" : "sell" %>"><%= trade.getType() %></span></td>
             <td><%= trade.getQuantity() %></td>
-            <td>$<%= trade.getEntryPrice() %></td>
-            <td>$<%= trade.getExitPrice() %></td>
-            <td><%= trade.getPnl() %></td>
-            <td><%= trade.getPercentage() %></td>
-            <td><%= trade.getNotes() %></td>
+            <td class="price-cell">$<%= trade.getEntryPrice() %></td>
+            <td class="price-cell">$<%= trade.getExitPrice() %></td>
+            <td class="pnl-cell <%= trade.getPnl() >= 0 ? "positive" : "negative" %>">
+              <%= String.format("%s$%.2f", trade.getPnl() >= 0 ? "+" : "", trade.getPnl()) %>
+            </td>
+            <td class="percentage-cell <%= trade.getPercentage() >= 0 ? "positive" : "negative" %>">
+              <%= String.format("%.2f%%", trade.getPercentage()) %>
+            </td>
+            <td class="notes-cell"><%= trade.getNotes() %></td>
             
-			<td>
-		    <button class="icon-btn edit-btn" data-id="<%= trade.getId() %>"
+			<td class="actions-cell">
+		    <button class="action-btn edit-btn" data-id="<%= trade.getId() %>"
 		        data-date="<%= trade.getDate() %>" data-symbol="<%= trade.getSymbol() %>"
 		        data-type="<%= trade.getType() %>" data-quantity="<%= trade.getQuantity() %>"
 		        data-entry="<%= trade.getEntryPrice() %>" data-exit="<%= trade.getExitPrice() %>"
 		        data-pnl="<%= String.format("%.2f", trade.getPnl()) %>" data-percentage="<%= trade.getPercentage() %>"
-		        data-notes="<%= trade.getNotes() %>">
+		        data-notes="<%= trade.getNotes() %>" title="Edit Trade">
 		        <i class="fas fa-edit"></i>
 		    </button>
 		
-		    <button class="icon-btn delete-btn" 
+		    <button class="action-btn delete-btn" 
 			  data-id="<%= trade.getId() %>"
 			  data-date="<%= trade.getDate() %>"
 			  data-symbol="<%= trade.getSymbol() %>"
@@ -142,76 +148,106 @@
 			  data-quantity="<%= trade.getQuantity() %>"
 			  data-entry="<%= trade.getEntryPrice() %>"
 			  data-exit="<%= trade.getExitPrice() %>"
-			  data-notes="<%= trade.getNotes() %>">
+			  data-notes="<%= trade.getNotes() %>" title="Delete Trade">
 			  <i class="fas fa-trash-alt"></i>
 			</button>
-
 			</td>
-			
-			        </tr>
+        </tr>
         <% 
         		} 
-        
         			}	
         			else{
         				%>
         				<tr>
-        				    <td colspan="5">No trades found.</td>
-        				      <p style="color: red;">tradeList is null!</p>
+        				    <td colspan="11" class="no-data">No trades found.</td>
         				</tr>
         				<%
         				    }
-        				%> </table>
-             
-             
-
-
-            
+        				%>
+        </tbody>
+        </table>
+        </div>
           </div>
-        <!-- </section> -->
-   
-             <!-- Add Trade Modal -->
-<div id="addTradeModal" class="modal hidden" >
-  <div class="modal-content">
-    <button type="button" id="closeAddTradeModalBtn" class="close-btn">&times;</button>
-    <form id="addTradeForm" method="post">
-      <input type="hidden" name="id" id="tradeId">
-<input type="hidden" name="mode" id="formMode" value="add">
+          
+          
+    
+          
+</div>
+</div>
 
-      <label>Date:</label>
-      <input type="date" name="date" id="tradeDate" required>
+      
+      <!-- Add Trade Modal -->
+<div id="addTradeModal" class="modal hidden">
+  <div class="modal-backdrop"></div>
+  <div class="modal-container">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add New Trade</h3>
+        <button type="button" id="closeAddTradeModalBtn" class="close-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <form id="addTradeForm" method="post" class="trade-form">
+        <input type="hidden" name="id" id="tradeId">
+        <input type="hidden" name="mode" id="formMode" value="add">
 
-      <label>Symbol:</label>
-      <input type="text" name="symbol" id="tradeSymbol" required>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tradeDate">Date</label>
+            <input type="date" name="date" id="tradeDate" required class="form-input">
+          </div>
 
-      <label>Type:</label>
-      <select name="type" id="tradeType" required>
-        <option value="BUY">BUY</option>
-        <option value="SELL">SELL</option>
-      </select>
+          <div class="form-group">
+            <label for="tradeSymbol">Symbol</label>
+            <input type="text" name="symbol" id="tradeSymbol" required class="form-input" placeholder="e.g., AAPL">
+          </div>
+        </div>
 
-      <label>Quantity:</label>
-      <input type="number" name="quantity" id="tradeQuantity" required>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tradeType">Type</label>
+            <select name="type" id="tradeType" required class="form-input">
+              <option value="">Select Type</option>
+              <option value="BUY">BUY</option>
+              <option value="SELL">SELL</option>
+            </select>
+          </div>
 
-      <label>Entry Price:</label>
-      <input type="number" step="0.01" name="entry" id="tradeEntry" required>
+          <div class="form-group">
+            <label for="tradeQuantity">Quantity</label>
+            <input type="number" name="quantity" id="tradeQuantity" required class="form-input" placeholder="100">
+          </div>
+        </div>
 
-      <label>Exit Price:</label>
-      <input type="number" step="0.01" name="exit" id="tradeExit" required>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tradeEntry">Entry Price</label>
+            <input type="number" step="0.01" name="entry" id="tradeEntry" required class="form-input" placeholder="0.00">
+          </div>
 
-      <label>Notes:</label>
-      <textarea name="notes" id="tradeNotes"></textarea>
+          <div class="form-group">
+            <label for="tradeExit">Exit Price</label>
+            <input type="number" step="0.01" name="exit" id="tradeExit" required class="form-input" placeholder="0.00">
+          </div>
+        </div>
 
-		<button type="submit" id="submitButton" class="submit-btn">Add Trade</button>
-    </form>
+        <div class="form-group full-width">
+          <label for="tradeNotes">Notes</label>
+          <textarea name="notes" id="tradeNotes" class="form-input" rows="3" placeholder="Add any notes about this trade..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="cancel-btn">Cancel</button>
+          <button type="submit" id="submitButton" class="submit-btn">
+            <i class="fas fa-plus"></i>
+            Add Trade
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-</div>
-</div>
-      
-
-
-     <!-- /*for add trade*/ -->
 
 
 <script>
@@ -219,51 +255,62 @@ document.addEventListener("DOMContentLoaded", () => {
   const openBtn = document.getElementById("openAddTradeModal");
   const modal = document.getElementById("addTradeModal");
   const closeBtn = document.getElementById("closeAddTradeModalBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
   const form = document.getElementById("addTradeForm");
   const submitButton = document.getElementById("submitButton");
+  const modalTitle = document.getElementById("modalTitle");
 
-  document.querySelectorAll("#addTradeForm input, #addTradeForm select, #addTradeForm textarea").forEach(input => {
-	  input.disabled = false;
-	});
-
-  // Reset form and set for adding
-  openBtn.addEventListener("click", () => {
-    form.reset();
-    document.getElementById("tradeId").value = "";
-    submitButton.textContent = "Add Trade";
-    form.action = `${pageContext.request.contextPath}/JournalServlet`;
-    modal.classList.remove("hidden");
-  });
-
-  closeBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-  submitButton.textContent = "Add Trade";
-  submitButton.style.backgroundColor = ""; // Reset to default
-  submitButton.style.color = "";           // Reset to default
-
-  
-  document.querySelectorAll("#addTradeForm input, #addTradeForm select, #addTradeForm textarea").forEach(input => {
-	  input.readOnly = false;
-	  input.classList.remove("readonly-field");
-	});
-	document.getElementById("tradeType").disabled = false;
- 
- document.getElementById("formMode").value = "add";
+  // Disable form inputs initially
   document.querySelectorAll("#addTradeForm input, #addTradeForm select, #addTradeForm textarea").forEach(input => {
     input.disabled = false;
   });
+
+  // Open modal for adding new trade
+  openBtn.addEventListener("click", () => {
+    resetModal();
+    modal.classList.remove("hidden");
+    document.body.classList.add("modal-open");
   });
 
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      modal.classList.add("hidden");
+  // Close modal functions
+  const closeModal = () => {
+    modal.classList.add("hidden");
+    document.body.classList.remove("modal-open");
+    resetModal();
+  };
+
+  closeBtn.addEventListener("click", closeModal);
+  cancelBtn.addEventListener("click", closeModal);
+
+  // Close modal when clicking backdrop
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal || event.target.classList.contains("modal-backdrop")) {
+      closeModal();
     }
   });
-  
-//Delete mode
+
+  // Reset modal to add mode
+  const resetModal = () => {
+    form.reset();
+    document.getElementById("tradeId").value = "";
+    document.getElementById("formMode").value = "add";
+    modalTitle.textContent = "Add New Trade";
+    submitButton.innerHTML = '<i class="fas fa-plus"></i> Add Trade';
+    submitButton.className = "submit-btn";
+    form.action = `${pageContext.request.contextPath}/JournalServlet`;
+
+    // Enable all form fields
+    document.querySelectorAll("#addTradeForm input, #addTradeForm select, #addTradeForm textarea").forEach(input => {
+      input.readOnly = false;
+      input.disabled = false;
+      input.classList.remove("readonly-field");
+    });
+  };
+
+  // Delete mode
   document.querySelectorAll(".delete-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      // Fill fields
+      // Fill fields with data
       document.getElementById("tradeId").value = btn.dataset.id;
       document.getElementById("tradeDate").value = btn.dataset.date;
       document.getElementById("tradeSymbol").value = btn.dataset.symbol;
@@ -273,35 +320,29 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("tradeExit").value = btn.dataset.exit;
       document.getElementById("tradeNotes").value = btn.dataset.notes;
 
-      // Disable fields (readonly mode)
+      // Make fields readonly
       document.querySelectorAll("#addTradeForm input, #addTradeForm select, #addTradeForm textarea").forEach(input => {
-  input.readOnly = true;
-  input.classList.add("readonly-field");
-});
-document.getElementById("tradeType").disabled = true; // for select, keep disabled
+        input.readOnly = true;
+        input.classList.add("readonly-field");
+      });
+      document.getElementById("tradeType").disabled = true;
 
-
-      // Set form mode and button style
+      // Set delete mode
       document.getElementById("formMode").value = "delete";
-      submitButton.textContent = "Delete Trade";
-      submitButton.style.backgroundColor = "#e53935"; // red
-      submitButton.style.color = "white";
+      modalTitle.textContent = "Delete Trade";
+      submitButton.innerHTML = '<i class="fas fa-trash"></i> Delete Trade';
+      submitButton.className = "submit-btn delete-mode";
 
       form.action = `${pageContext.request.contextPath}/JournalServlet`;
       modal.classList.remove("hidden");
+      document.body.classList.add("modal-open");
     });
   });
-
-  
-
 
   // Edit mode
-  document.querySelectorAll("#addTradeForm input, #addTradeForm select, #addTradeForm textarea").forEach(input => {
-  input.disabled = false;
-});
-
   document.querySelectorAll(".edit-btn").forEach(btn => {
     btn.addEventListener("click", () => {
+      // Fill fields with data
       document.getElementById("tradeId").value = btn.dataset.id;
       document.getElementById("tradeDate").value = btn.dataset.date;
       document.getElementById("tradeSymbol").value = btn.dataset.symbol;
@@ -311,62 +352,65 @@ document.getElementById("tradeType").disabled = true; // for select, keep disabl
       document.getElementById("tradeExit").value = btn.dataset.exit;
       document.getElementById("tradeNotes").value = btn.dataset.notes;
 
-      submitButton.textContent = "Update Trade";
+      // Set edit mode
+      document.getElementById("formMode").value = "edit";
+      modalTitle.textContent = "Edit Trade";
+      submitButton.innerHTML = '<i class="fas fa-save"></i> Update Trade';
+      submitButton.className = "submit-btn edit-mode";
+
       form.action = `${pageContext.request.contextPath}/JournalServlet`;
       modal.classList.remove("hidden");
+      document.body.classList.add("modal-open");
     });
   });
 });
+
+// Search and filter functionality
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const symbolFilter = document.getElementById("symbolFilter");
+  const typeFilter = document.getElementById("typeFilter");
+  const rows = document.querySelectorAll(".trade-table tbody tr");
+
+  function filterTrades() {
+    const search = searchInput.value.toLowerCase();
+    const selectedSymbol = symbolFilter.value;
+    const selectedType = typeFilter.value;
+
+    rows.forEach(row => {
+      const cells = row.querySelectorAll("td");
+      if (!cells.length || cells.length < 10) return;
+
+      const symbol = cells[2].textContent.trim();
+      const type = cells[3].textContent.trim();
+      const notes = cells[9].textContent.toLowerCase();
+
+      const matchesSearch = symbol.toLowerCase().includes(search) || notes.includes(search);
+      const matchesSymbol = !selectedSymbol || symbol === selectedSymbol;
+      const matchesType = !selectedType || type === selectedType;
+
+      if (matchesSearch && matchesSymbol && matchesType) {
+        row.style.display = "";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  }
+
+  searchInput.addEventListener("input", filterTrades);
+  symbolFilter.addEventListener("change", filterTrades);
+  typeFilter.addEventListener("change", filterTrades);
+});
 </script>
 
-
-   
-
-
-    
-     <!-- /*for trade search and fileter*/ -->
-    
-    <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById("searchInput");
-    const symbolFilter = document.getElementById("symbolFilter");
-    const typeFilter = document.getElementById("typeFilter");
-    const rows = document.querySelectorAll(".trade-table tr:not(:first-child)");
-
-    function filterTrades() {
-      const search = searchInput.value.toLowerCase();
-      const selectedSymbol = symbolFilter.value;
-      const selectedType = typeFilter.value;
-
-      rows.forEach(row => {
-        const cells = row.querySelectorAll("td");
-        if (!cells.length) return; // skip if not a valid row
-
-        const symbol = cells[2].textContent.trim();  // Symbol
-        const type = cells[3].textContent.trim();    // Type
-        const notes = cells[9].textContent.toLowerCase(); // Notes
-
-
-        const matchesSearch = symbol.toLowerCase().includes(search) || notes.includes(search);
-        const matchesSymbol = !selectedSymbol || symbol === selectedSymbol;
-        const matchesType = !selectedType || type === selectedType;
-
-        if (matchesSearch && matchesSymbol && matchesType) {
-          row.style.display = "";
-        } else {
-          row.style.display = "none";
-        }
-      });
-    }
-
-    searchInput.addEventListener("input", filterTrades);
-    symbolFilter.addEventListener("change", filterTrades);
-    typeFilter.addEventListener("change", filterTrades);
+<script>
+  // Check if there's a success message from the server
+  window.addEventListener('DOMContentLoaded', () => {
+    <% if(message != null && !message.isEmpty()) { %>
+      // Small delay to ensure the alert is shown after page load
+      setTimeout(() => {
+        alert('<%= message %>');
+      }, 300);
+    <% } %>
   });
 </script>
-
-
-
-
-    
-    

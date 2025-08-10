@@ -24,11 +24,11 @@ public class ContactServlet extends HttpServlet {
         boolean isSaved = dao.saveContact(contact);
 
         if (isSaved) {
-        	response.sendRedirect(request.getContextPath() + "/index.jsp?page=support");
-        	
-
+            request.setAttribute("message", "Message sent successfully");
+            request.setAttribute("page", "support");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
-            response.sendRedirect("support.jsp");
+            response.sendRedirect(request.getContextPath() + "/index.jsp?page=support");
         }
     }
 }

@@ -146,4 +146,13 @@
   </div>
 </div>
 
+<script>
+  // Check for success message on page load
+  window.addEventListener('DOMContentLoaded', function() {
+    <% if(request.getAttribute("message") != null) { %>
+      alert('<%= request.getAttribute("message") %>');
+    <% } %>
+  });
+</script>
+
 

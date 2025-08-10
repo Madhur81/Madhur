@@ -52,7 +52,8 @@
             if (pageName == null || pageName.trim().isEmpty()) {
                 pageName = "home";
             }
-            if (!pageName.matches("^[a-zA-Z0-9_-]+$")) {
+            if (!pageName.matches("^[a-zA-Z0-9_\\-/]+$")) {
+
                 pageName = "home"; // security fallback
             }
 

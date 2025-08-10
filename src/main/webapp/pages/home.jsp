@@ -7,27 +7,7 @@
             <p>Here's your trading education progress and portfolio overview.</p>
     </div>
     
-    <section class="stats-grid">
-            <div class="card stat-card">
-              <div class="stat-title">Account Balance</div>
-              <div class="stat-value">$25,48.00</div>
-              <div class="stat-change positive">+12.5%</div>
-            </div>
-
-            <div class="card stat-card">
-              <div class="stat-title">Open P&L</div>
-              <div class="stat-value">+$1,247.50</div>
-              <div class="stat-change positive">+5.2%</div>
-            </div>
-
-            <div class="card stat-card">
-              <div class="stat-title">Progress</div>
-              <div class="stat-value">68%</div>
-              <div class="stat-change neutral">4 modules completed</div>
-            </div>
-          </section>
-		
-			<div class="chart-watchlist-wrapper">
+    	<div class="chart-watchlist-wrapper">
 				  <!-- TradingView Chart -->
 				  <div id="tradingview_chart"></div>
 				
@@ -41,6 +21,80 @@
 				</div>
 				
 			
+    
+    <section class="stats-grid">
+            <div class="card stat-card">
+              <div class="stat-title">Account Balance</div>
+              <div class="stat-value">$25,48.00</div>
+              <div class="stat-change positive">+12.5%</div>
+            </div>
+
+            <div class="card stat-card">
+              <div class="stat-title">Open P&L</div>
+              <div class="stat-value">+$1,247.50</div>
+              <div class="stat-change positive">+5.2%</div>
+            </div>
+
+            
+          </section>
+           <div class="courses-header">
+                <h2>Enrolled Courses</h2>
+                <button class="view-all-btn">View All</button>
+              </div>
+
+              <div class="courses-grid">
+
+                <!-- Course Card 1 -->
+                <div class="course-card">
+                  <img src="tumbnails/technical.png" alt="Technical Analysis Fundamentals" class="course-img">
+                  <div class="course-title"><strong>Technical Analysis Fundamentals</strong></div>
+                  <div class="course-time">Time spent: 4.5 hours</div>
+                  <div class="course-progress-row">
+                    <span>Progress</span>
+                    <span>75%</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 75%"></div>
+                  </div>
+									<a href="index.jsp?page=continue-learning" class="continue-btn">Continue Learning</a>
+                </div>
+                <!-- Course Card 2 -->
+                <div class="course-card">
+                  <img src="tumbnails/risk.png" alt="Risk Management Strategies" class="course-img">
+                  <div class="course-title"><strong>Risk Management Strategies</strong></div>
+                  <div class="course-time">Time spent: 2.1 hours</div>
+                  <div class="course-progress-row">
+                    <span>Progress</span>
+                    <span>45%</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 45%"></div>
+                  </div>
+					
+									<a href="index.jsp?page=learning2" class="continue-btn">Continue Learning</a>
+
+										
+                  
+                </div>
+                <!-- Course Card 3 -->
+                <div class="course-card">
+                  <img src="tumbnails/option.png" alt="Options Trading Basics" class="course-img">
+                  <div class="course-title"><strong>Options Trading Basics</strong></div>
+                  <div class="course-time">Time spent: 1.8 hours</div>
+                  <div class="course-progress-row">
+                    <span>Progress</span>
+                    <span>25%</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 25%"></div>
+                  </div>
+									<a href="index.jsp?page=learning3" class="continue-btn">Continue Learning</a>
+                </div>
+                </div>
+                
+                
+		
+		
 			<script>
 			const watchlistPairs = [
 			
@@ -73,7 +127,7 @@
       symbol: symbol,
       interval: "1",
       timezone: "Asia/Kolkata",
-      theme: "Dark",
+      theme: "Light",
       style: "1",
       locale: "en",
       toolbar_bg: "#f1f3f6",

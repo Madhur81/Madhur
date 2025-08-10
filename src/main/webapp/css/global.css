@@ -45,14 +45,28 @@
   
   /* Shadows */
   --shadow-elevated: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* Toast Notification Colors */
+  --toast-success-bg: rgba(31, 209, 166, 0.95);
+  --toast-error-bg: rgba(220, 53, 69, 0.95);
+  --toast-warning-bg: rgba(255, 214, 0, 0.95);
+  --toast-info-bg: rgba(13, 110, 253, 0.95);
+  --toast-text: #ffffff;
+  --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Font Family */
 html, body {
-  font-family: 'Inter', 'Roboto', Arial, Helvetica, sans-serif;
-  background: var(--main-bg);
-  color: var(--text-main);
+   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            color: var(--text-primary);
+            line-height: 1.6;
 }
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 /* Headings */
 h1, h2, h3, h4, h5 {
@@ -64,5 +78,192 @@ h1, h2, h3, h4, h5 {
 h1 { font-size: 2.2rem; }
 h2 { font-size: 1.75rem; }
 h3 { font-size: 1.3rem; }
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: var(--toast-shadow);
+  color: var(--toast-text);
+  transform: translateX(120%);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast-success {
+  background-color: var(--toast-success-bg);
+}
+
+.toast-error {
+  background-color: var(--toast-error-bg);
+}
+
+.toast-warning {
+  background-color: var(--toast-warning-bg);
+}
+
+.toast-info {
+  background-color: var(--toast-info-bg);
+}
+
+.toast-icon {
+  margin-right: 12px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 0.95rem;
+  padding-right: 10px;
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  color: var(--toast-text);
+  opacity: 0.7;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+  opacity: 1;
+}
+
+.toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  transform-origin: left;
+  animation: toast-progress linear forwards;
+}
+
+@keyframes toast-progress {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(120%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slide-out {
+  from { transform: translateX(0); }
+  to { transform: translateX(120%); }
+}
+
+/* Courses Search Bar */
+.courses-search-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: var(--color-surface);
+  border-radius: 8px;
+}
+
+.courses-search-bar input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.filter-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.filter-btn {
+  margin-left: 10px;
+  padding: 10px 15px;
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filter-btn:hover {
+  background-color: var(--color-accent-dark);
+}
+
+.filter-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  z-index: 1;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.filter-content label {
+  display: block;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.filter-content hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 10px 0;
+}
+
+#applyFilters {
+  width: 100%;
+  padding: 8px;
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#applyFilters:hover {
+  background-color: var(--color-accent-dark);
+}
+
+
 
 

@@ -1,3 +1,134 @@
+/* Overlay */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Popup Window */
+.popup-window {
+  background: #1e1e2f;
+  padding: 25px 30px;
+  width: 500px;
+  max-width: 95%;
+  border-radius: 12px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+  animation: popupFade 0.3s ease-out;
+  color: #e4e4e4;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 20px;
+  color: #ccc;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #fff;
+}
+
+/* Price Tag */
+.popup-price {
+  background: #28a745;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.popup-price i {
+  margin-right: 6px;
+}
+
+/* Title */
+.popup-window h2 {
+  font-size: 22px;
+  margin: 5px 0 10px;
+  color: #00d4ff;
+}
+
+.popup-window h2 i {
+  margin-right: 8px;
+}
+
+/* Paragraphs */
+.popup-window p {
+  margin: 6px 0;
+  line-height: 1.5;
+  color: #ccc;
+}
+
+.text-gold {
+  color: gold;
+}
+
+/* Footer Buttons */
+.popup-footer {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancel-btn,
+.buy-btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cancel-btn {
+  background: #444;
+  color: #ddd;
+}
+
+.cancel-btn:hover {
+  background: #666;
+}
+
+.buy-btn {
+  background: #007bff;
+  color: #fff;
+}
+
+.buy-btn:hover {
+  background: #0056b3;
+}
+
+/* Animation */
+@keyframes popupFade {
+  from {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 /* ========== COURSES PAGE ONLY ========== */
 
 .search-filter {
