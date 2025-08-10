@@ -1,0 +1,125 @@
+@charset "UTF-8";
+ /* ---------- Global ---------- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+    body, html {
+      height: 100%;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #eee;
+    }
+    a { text-decoration: none; }
+
+    /* ---------- Centered Card ---------- */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    .login-card {
+      background: rgba(0, 0, 0, 0.75);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      width: 320px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: url('https://cdn-icons-png.flaticon.com/512/2620/2620557.png') no-repeat center/contain; /* subtle trading icon */
+      opacity: 0.05;
+      transform: rotate(45deg);
+      pointer-events: none;
+  z-index: 0;
+    }
+
+    /* ---------- Header ---------- */
+    .login-card h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #00e5ff;
+    }
+    .login-card p.subtitle {
+      font-size: 0.95rem;
+      color: #aaa;
+      margin-bottom: 24px;
+    }
+
+    /* ---------- Form Fields ---------- */
+    .login-card label {
+      display: block;
+      text-align: left;
+      margin-bottom: 4px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .login-card input[type="text"],
+    .login-card input[type="password"] {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 6px;
+      background: #1f2a33;
+      color: #eee;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .login-card input:focus {
+      background: #2c3e50;
+      outline: none;
+    }
+
+    /* ---------- Button ---------- */
+    .login-card button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #00e5ff, #0072ff);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.1s;
+    }
+    .login-card button:hover {
+      background: linear-gradient(90deg, #0072ff, #00e5ff);
+    }
+    .login-card button:active {
+      transform: scale(0.98);
+    }
+
+    /* ---------- Error Message ---------- */
+    .login-card .error {
+      color: #ff4d4f;
+      margin-top: -16px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Footer ---------- */
+    .login-footer {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: #555;
+    }
+    .login-card form,
+.login-card input,
+.login-card button {
+  position: relative;
+  z-index: 1;
+}
+    
